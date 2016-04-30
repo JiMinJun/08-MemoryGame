@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head >
+	<title>Memory Game</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-app="memoryGame" ng-controller="memoryGameCtrl">
+<!-- 	Select difficulty and start game -->
+	<div class="container">
+		<div class="panel panel-info" >
+			<div class="panel-heading text-center" >Memory Game</div>
+			<div class="panel-body" ng-hide="game.state === 'playing'">
+				<form>
+					<div class="form-group row">  
+						<label class="col-sm-2" for="difficultyOptions">Select Difficulty<br></label>
+						<div class="col-sm-10" id="difficultyOptions">
+							<input type="radio" name="difficulty" value="4" ng-model="game.difficulty"> Easy<br>
+							<input type="radio" name="difficulty" value="8" ng-model="game.difficulty"> Medium</br>
+							<input type="radio" name="difficulty" value="12" ng-model="game.difficulty"> Hard </br>
+						</div>
+						
+					</div>
+				</form>	
+			</div>
+<!-- Start game -->
+			<div class="panel panel-footer" >
+				<button class="btn btn-primary center-block" ng-click="startGame(game.difficulty)" ng-hide="game.state === 'playing'">Start</button>
+				<button class="btn btn-primary center-block" ng-click="game.state = 'start'" ng-show="game.state === 'playing'">Main Menu</button>
+			</div>
+
+		</div>	
+	</div>
+
+<!-- 	Display cards -->
+	<div class="row" id="cards" >
+		<div class="col-xs-8 col-xs-offset-2">
+			<div ng-repeat="card in cards track by $index" class="col-xs-3" >
+				<img src="images/png/square.png" ng-hide="card.flipped" ng-click="flipCard(card)">
+				<img ng-src="{{card.src}}" ng-show="card.flipped" style="max-width: 128px; max-height: 128px">
+			</div>
+		</div>
+	</div>
+<!-- sources and scripts -->
+<!-- 	<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> -->
+	
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="app/main.js"></script>
+</body>
+</html>
