@@ -24,15 +24,20 @@
 			</div>
 <!-- Start game -->
 			<div class="panel panel-footer" >
-				<button class="btn btn-primary center-block" ng-click="startGame(game.difficulty)" ng-hide="game.state === 'playing'">Start</button>
-				<button class="btn btn-primary center-block" ng-click="game.state = 'start'" ng-show="game.state === 'playing'">Main Menu</button>
+				<button class="btn btn-primary center-block" ng-click="startGame(game.difficulty)" ng-hide="game.state === 'playing'">New Board</button> <br>
+				<button class="btn btn-primary center-block" ng-click="game.state = 'pause'" ng-show="game.state === 'playing'">Main Menu</button>
+				<button class="btn btn-primary center-block" ng-click="game.state = 'playing'" ng-show="game.state === 'pause'">Resume</button>
 			</div>
 
 		</div>	
 	</div>
 
 <!-- 	Display cards -->
-	<div class="row" id="cards" >
+	<div class="row" id="cards" ng-hide="game.state === 'pause'" >
+		<div class="col-xs-12 text-center" ng-show="game.state === 'playing'|| game.state === 'complete'">
+			<h2>Total moves: {{moves}}</h2>
+		</div>
+		
 		<div class="col-xs-8 col-xs-offset-2">
 			<div ng-repeat="card in cards track by $index" class="col-xs-3" >
 				<img src="images/png/square.png" ng-hide="card.flipped" ng-click="flipCard(card)">

@@ -7,6 +7,7 @@ var myApp = angular.module('memoryGame', []).controller('memoryGameCtrl', [
     $scope.cards = [];
     var selectedCard = null;
     var matchedCards = 0;
+    $scope.moves = 0;
     $scope.game = {
       state: "Start"
     };
@@ -14,6 +15,8 @@ var myApp = angular.module('memoryGame', []).controller('memoryGameCtrl', [
     $scope.startGame = function(difficulty) {
       $scope.game.state = "playing";
       $scope.cards = [];
+      matchedCards = 0;
+      $scope.moves = 0;
 
       $http.get('app/cardInfo.json')
         .then(function(response) {
@@ -54,6 +57,7 @@ var myApp = angular.module('memoryGame', []).controller('memoryGameCtrl', [
         if (matchedCards === parseInt($scope.game.difficulty)) {
           $scope.game.state = 'complete';
         }
+        $scope.moves ++;
         return;
       }
 
@@ -65,6 +69,7 @@ var myApp = angular.module('memoryGame', []).controller('memoryGameCtrl', [
           selectedCard.flipped = false;
           selectedCard = null;
         }, 400)
+        $scope.moves ++;
       }
       // if($scope.selectedCards.length === 0) {
       //   $scope.selectedCards.push(card);
